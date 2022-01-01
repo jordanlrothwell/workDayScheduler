@@ -3,39 +3,39 @@ let today = moment();
 let dayPlan = [
   {
     thisHour: "09",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "10",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "11",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "12",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "13",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "14",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "15",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "16",
-    activity: "",
+    description: "",
   },
   {
     thisHour: "17",
-    activity: "",
+    description: "",
   },
 ];
 // function to update current day
@@ -44,8 +44,15 @@ let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
 // update current day
 updateDay();
 
-// function to convert hour string to moment object
-let momentify = (str) => moment(str + ":00:00", "HH").format("LT");
+// functions to create or format moments
+let makeMoment = (str) => moment(str, "HH");
+let makeAMorPM = (moment) => moment.format("LT");
+let makeHour = (moment) => moment.format("HH");
+
+// past/present/future colour functions
+let makePast = (element) => element.addClass("past");
+let makePresent = (element) => element.addClass("present");
+let makeFuture = (element) => element.addClass("future");
 
 // create row div + append to container
 let createRowDiv = () => {
@@ -55,20 +62,29 @@ let createRowDiv = () => {
 
 // create hour div
 let createHourDiv = (i) => {
-  let hourDiv = $("<div>").attr({ class: "hour" });
-  hourDiv.text(momentify(dayPlan[i].thisHour));
+  let hourDiv = $("<div>").attr({ class: "col-md-2 hour" });
+  hourDiv.text(makeAMorPM(makeMoment(dayPlan[i].thisHour)));
   return hourDiv;
 };
 
 // create textarea
-let createTextArea = () => {
-  let textArea = $("<textarea>");
+let createTextArea = (i) => {
+  let textArea = $("<textarea>").attr({ class: "col-md-9 description p-0" });
+  let givenHour = makeHour(makeMoment(dayPlan[i].thisHour));
+  let currentHour = today.format("HH");
+  if (currentHour > givenHour) {
+    makePast(textArea);
+  } else if (currentHour == givenHour) {
+    makePresent(textArea);
+  } else {
+    makeFuture(textArea);
+  }
   return textArea;
 };
 
 // create save button
 let createSaveButton = () => {
-  let saveButton = $("<button>");
+  let saveButton = $("<button>").attr({ class: "col-md-1 saveButton" });
   return saveButton;
 };
 
@@ -76,7 +92,7 @@ let createSaveButton = () => {
 let newRow = (i) => {
   return createRowDiv().append(
     createHourDiv(i),
-    createTextArea(),
+    createTextArea(i),
     createSaveButton()
   );
 };
