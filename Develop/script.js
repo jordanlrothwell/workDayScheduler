@@ -2,47 +2,60 @@ let today = moment();
 
 let dayPlan = [
   {
+    index: "0",
     thisHour: "09",
     description: "",
   },
   {
+    index: "1",
     thisHour: "10",
     description: "",
   },
   {
+    index: "2",
     thisHour: "11",
     description: "",
   },
   {
+    index: "3",
     thisHour: "12",
     description: "",
   },
   {
+    index: "4",
     thisHour: "13",
     description: "",
   },
   {
+    index: "5",
     thisHour: "14",
     description: "",
   },
   {
+    index: "6",
     thisHour: "15",
     description: "",
   },
   {
+    index: "7",
     thisHour: "16",
     description: "",
   },
   {
+    index: "8",
     thisHour: "17",
     description: "",
   },
 ];
-// function to update current day
-let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
+
+// save dayplan object to local storage
+let saveDay = () => localStorage.setItem("dayPlan", JSON.stringify(dayPlan));
+
+// save textarea content to dayplan object
+let saveDescription = () => {};
 
 // update current day
-updateDay();
+let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
 
 // functions to create or format moments
 let makeMoment = (str) => moment(str, "HH");
@@ -69,7 +82,11 @@ let createHourDiv = (i) => {
 
 // create textarea
 let createTextArea = (i) => {
-  let textArea = $("<textarea>").attr({ class: "col-md-9 description p-0" });
+  let giveID = "textID-" + i;
+  let textArea = $("<textarea>").attr({
+    id: giveID,
+    class: "col-md-9 description p-0",
+  });
   let givenHour = makeHour(makeMoment(dayPlan[i].thisHour));
   let currentHour = today.format("HH");
   if (currentHour > givenHour) {
@@ -83,8 +100,12 @@ let createTextArea = (i) => {
 };
 
 // create save button
-let createSaveButton = () => {
-  let saveButton = $("<button>").attr({ class: "col-md-1 saveButton" });
+let createSaveButton = (i) => {
+  let saveButton = $("<button>").attr({ class: "col-md-1 save-button" });
+  // add event listener
+  saveButton.click(function () {
+    console.log();
+  });
   return saveButton;
 };
 
@@ -93,7 +114,7 @@ let newRow = (i) => {
   return createRowDiv().append(
     createHourDiv(i),
     createTextArea(i),
-    createSaveButton()
+    createSaveButton(i)
   );
 };
 
@@ -106,3 +127,7 @@ let generateContent = (i) => {
 for (i = 0; i < dayPlan.length; i++) {
   generateContent(i);
 }
+saveDay();
+updateDay();
+
+$("#textID-5").text("test");
