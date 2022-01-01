@@ -10,7 +10,16 @@ let dayPlan = [
         activity: "",
     }
 ]
-// Set value for currentDay
+// function to update current day
 let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
 
+// update current day
 updateDay();
+
+// create row
+let createRow = function() {
+    let hourRow = $("<div>").attr({"class": "row"});
+    $(".container").append(hourRow)
+}
+
+createRow();
