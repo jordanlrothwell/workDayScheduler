@@ -104,7 +104,9 @@ let createSaveButton = (i) => {
   let saveButton = $("<button>").attr({ class: "col-md-1 save-button" });
   // add event listener
   saveButton.click(function () {
-    console.log();
+    siblingTextID = "#textID-" + i;
+    dayPlan[i].description = $(siblingTextID).val();
+    saveDay();
   });
   return saveButton;
 };
@@ -129,5 +131,3 @@ for (i = 0; i < dayPlan.length; i++) {
 }
 saveDay();
 updateDay();
-
-$("#textID-5").text("test");
