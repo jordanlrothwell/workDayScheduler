@@ -48,19 +48,25 @@ let dayPlan = [
   },
 ];
 
+// save description to object
+let saveDescription = (i, ID) => dayPlan[i].description = $(ID).val();
+
+// save object to local storage
+let saveDay = () => localStorage.setItem("dayPlan", JSON.stringify(dayPlan));
+
+// populate from data in local storage
+
+
 // check for existing descriptions
 let checkExisting = () => {
     let existingPlan = JSON.parse(localStorage.getItem("dayPlan"));
     if (existingPlan) {
         dayPlan = existingPlan;
     }
+    for (i = 0; i < dayPlan.length; i++) {
+        $(`#textID-${i}`).val(dayPlan[i].description)
+    }
 }
-
-// save description to object
-let saveDescription = (i, ID) => dayPlan[i].description = $(ID).val();
-
-// save object to local storage
-let saveDay = () => localStorage.setItem("dayPlan", JSON.stringify(dayPlan));
 
 // update current day
 let updateHeader = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
