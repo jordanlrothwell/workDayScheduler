@@ -48,14 +48,22 @@ let dayPlan = [
   },
 ];
 
-// save dayplan object to local storage
+// check for existing descriptions
+let checkExisting = () => {
+    let existingPlan = JSON.parse(localStorage.getItem("dayPlan"));
+    if (existingPlan) {
+        dayPlan = existingPlan;
+    }
+}
+
+// save description to object
+let saveDescription = (i, ID) => dayPlan[i].description = $(ID).val();
+
+// save object to local storage
 let saveDay = () => localStorage.setItem("dayPlan", JSON.stringify(dayPlan));
 
-// save textarea content to dayplan object
-let saveDescription = () => {};
-
 // update current day
-let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
+let updateHeader = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
 
 // functions to create or format moments
 let makeMoment = (str) => moment(str, "HH");
@@ -89,6 +97,7 @@ let createTextArea = (i) => {
   });
   let givenHour = makeHour(makeMoment(dayPlan[i].thisHour));
   let currentHour = today.format("HH");
+  // style text area based on whether past, present or future timeblock
   if (currentHour > givenHour) {
     makePast(textArea);
   } else if (currentHour == givenHour) {
@@ -104,8 +113,8 @@ let createSaveButton = (i) => {
   let saveButton = $("<button>").attr({ class: "col-md-1 save-button" });
   // add event listener
   saveButton.click(function () {
-    siblingTextID = "#textID-" + i;
-    dayPlan[i].description = $(siblingTextID).val();
+    let siblingTextID = "#textID-" + i;
+    saveDescription(i, siblingTextID);
     saveDay();
   });
   return saveButton;
@@ -129,5 +138,6 @@ let generateContent = (i) => {
 for (i = 0; i < dayPlan.length; i++) {
   generateContent(i);
 }
-saveDay();
-updateDay();
+
+updateHeader();
+checkExisting();
