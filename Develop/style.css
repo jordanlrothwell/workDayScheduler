@@ -21,10 +21,6 @@ textarea {
   border-bottom: 10px solid black;
 }
 
-.container {
-
-}
-
 .description {
   white-space: pre-wrap;
 }
@@ -35,8 +31,6 @@ textarea {
 }
 
 .row {
-  display: grid;
-  grid-template-columns: 200px auto 200px;
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;

@@ -2,11 +2,11 @@ let today = moment();
 
 let dayPlan = [
     {
-        hour: "09",
+        thisHour: "09",
         activity: "",
     },
     {
-        hour: "10",
+        thisHour: "10",
         activity: "",
     }
 ]
@@ -16,10 +16,22 @@ let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
 // update current day
 updateDay();
 
-// create row
-let createRow = function() {
-    let hourRow = $("<div>").attr({"class": "row"});
-    $(".container").append(hourRow)
+// function to convert hour string to moment object
+let momentify = (str) => moment(str + ":00:00", "HH").format("LT");
+
+
+// create row div + append to container
+let createRowDiv = () => {
+    let rowDiv = $("<div>").attr({"class": "row"}); 
+    $(".container").append(rowDiv);
 }
 
-createRow();
+// create hour div
+let createHourDiv = (i) => {
+    let hourDiv = $("<div>").attr({"class": "hour"});
+    $(".row").append(hourDiv);
+    hourDiv.text(momentify(dayPlan[i].thisHour));
+}
+
+createRowDiv();
+createHourDiv(1);
