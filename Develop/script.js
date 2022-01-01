@@ -1,11 +1,16 @@
-let nineOclock = moment('09:00:00', 'HH');
+let today = moment();
 
-$('#hour1').text(nineOclock.format('LT'))
-$('#hour2').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour3').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour4').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour5').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour6').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour7').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour8').text(nineOclock.add(1, 'hour').format('LT'))
-$('#hour9').text(nineOclock.add(1, 'hour').format('LT'))
+let dayPlan = [
+    {
+        hour: "09",
+        activity: "",
+    },
+    {
+        hour: "10",
+        activity: "",
+    }
+]
+// Set value for currentDay
+let updateDay = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
+
+updateDay();
