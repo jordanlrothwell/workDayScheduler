@@ -1,5 +1,7 @@
-let today = moment();
+// declare moment (for readability & testing)
+let today = moment("15", "HH");
 
+// declare an object containing the hour segments/to store user descriptions
 let dayPlan = [
   {
     index: "0",
@@ -54,9 +56,6 @@ let saveDescription = (i, ID) => dayPlan[i].description = $(ID).val();
 // save object to local storage
 let saveDay = () => localStorage.setItem("dayPlan", JSON.stringify(dayPlan));
 
-// populate from data in local storage
-
-
 // check for existing descriptions
 let checkExisting = () => {
     let existingPlan = JSON.parse(localStorage.getItem("dayPlan"));
@@ -69,7 +68,7 @@ let checkExisting = () => {
 }
 
 // update current day
-let updateHeader = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY"));
+let updateHeader = () => $("#currentDay").text(today.format("dddd, D MMMM YYYY."));
 
 // functions to create or format moments
 let makeMoment = (str) => moment(str, "HH");
@@ -117,6 +116,7 @@ let createTextArea = (i) => {
 // create save button
 let createSaveButton = (i) => {
   let saveButton = $("<button>").attr({ class: "col-md-1 save-button" });
+  let padlockIcon = $("<img>").attr({ source:})
   // add event listener
   saveButton.click(function () {
     let siblingTextID = "#textID-" + i;
@@ -144,6 +144,5 @@ let generateContent = (i) => {
 for (i = 0; i < dayPlan.length; i++) {
   generateContent(i);
 }
-
 updateHeader();
 checkExisting();
