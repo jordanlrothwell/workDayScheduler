@@ -18,3 +18,21 @@ Check it out [here](https://jordanlrothwell.github.io/workDayScheduler/).
 ```
 
 ## 💡 Images
+
+### Example of past/present future functionality:
+
+#### 1:00PM
+
+![1PM](https://raw.githubusercontent.com/jordanlrothwell/workDayScheduler/main/Assets/Images/1PM.JPG)
+
+#### 3:00PM
+
+![3PM](https://raw.githubusercontent.com/jordanlrothwell/workDayScheduler/main/Assets/Images/3PM.JPG)
+
+### Text is typed in the timeblocks...
+
+![1PM](https://raw.githubusercontent.com/jordanlrothwell/workDayScheduler/main/Assets/Images/preSave.JPG)
+
+### ...but the text is only saved if the save button is clicked.
+
+![1PM](https://raw.githubusercontent.com/jordanlrothwell/workDayScheduler/main/Assets/Images/postSave.JPG)
