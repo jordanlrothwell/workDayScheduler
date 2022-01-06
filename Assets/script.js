@@ -1,5 +1,5 @@
 // declare moment (for readability & testing)
-let today = moment("15", "HH");
+let today = moment();
 
 // declare an object containing the hour segments/to store user descriptions
 let dayPlan = [
