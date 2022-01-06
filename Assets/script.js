@@ -116,7 +116,8 @@ let createTextArea = (i) => {
 // create save button
 let createSaveButton = (i) => {
   let saveButton = $("<button>").attr({ class: "col-md-1 save-button" });
-  // let padlockIcon = $("<img>").attr({ source:})
+  let padlockIcon = $("<img>").attr({ id: "padlock", src: "https://raw.githubusercontent.com/jordanlrothwell/workDayScheduler/main/Assets/Icons/padlock.png"})
+  saveButton.append(padlockIcon);
   // add event listener
   saveButton.click(function () {
     let siblingTextID = "#textID-" + i;
